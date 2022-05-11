@@ -15,14 +15,15 @@ class Form extends Component {
           <label htmlFor="box-weight">Weight:</label><br/>
           <input type="text" id="box-weight" name="box-weight"/><br/>
           <label htmlFor="box-colour">Box colour:</label><br/>
-          <input type="text" id="box-colour" name="box-colour"/><br/>
+          <input type="color" id="box-colour" name="box-colour" value="#FFFFFF"/><br/>
           <label htmlFor="country">Country:</label><br/>
           <select id="country-list">
             <option value="Sweden">Sweden</option>
             <option value="China">China</option>
             <option value="Brazil">Brazil</option>
             <option value="Australia">Australia</option>
-          </select>
+          </select><br/>
+          <button id="save-btn">Save</button>
         </form>
       </div>
     )
