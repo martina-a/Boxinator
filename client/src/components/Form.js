@@ -2,6 +2,7 @@ import React, { Component } from "react"
 
 class Form extends Component {
   toggleDropdown() {
+    document.getElementById("country-list").classList.toggle("show")
     console.log('Display dropdown')
   }
 
@@ -16,7 +17,12 @@ class Form extends Component {
           <label htmlFor="box-colour">Box colour:</label>
           <input type="text" id="box-colour" name="box-colour"/>
           <label htmlFor="country">Country:</label>
-          <input onClick={this.toggleDropdown} type="text" id="country" name="country"/>
+          <select className="country-list">
+            <option value="Sweden">Sweden</option>
+            <option value="China">China</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Australia">Australia</option>
+          </select>
         </form>
       </div>
     )
