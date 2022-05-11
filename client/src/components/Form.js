@@ -9,15 +9,15 @@ class Form extends Component {
   render() {
     return (
       <div id="form-container">
-        <form>
-          <label htmlFor="box-name">Name:</label>
-          <input type="text" id="box-name" name="box-name"/>
-          <label htmlFor="box-weight">Weight:</label>
-          <input type="text" id="box-weight" name="box-weight"/>
-          <label htmlFor="box-colour">Box colour:</label>
-          <input type="text" id="box-colour" name="box-colour"/>
-          <label htmlFor="country">Country:</label>
-          <select className="country-list">
+        <form id="form">
+          <label htmlFor="box-name">Name:</label><br/>
+          <input type="text" id="box-name" name="box-name"/><br/>
+          <label htmlFor="box-weight">Weight:</label><br/>
+          <input type="text" id="box-weight" name="box-weight"/><br/>
+          <label htmlFor="box-colour">Box colour:</label><br/>
+          <input type="text" id="box-colour" name="box-colour"/><br/>
+          <label htmlFor="country">Country:</label><br/>
+          <select id="country-list">
             <option value="Sweden">Sweden</option>
             <option value="China">China</option>
             <option value="Brazil">Brazil</option>
