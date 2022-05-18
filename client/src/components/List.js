@@ -1,6 +1,19 @@
 import React, { Component } from 'react'
 
 class List extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      boxes: []
+    }
+
+    this.calculateSum = this.calculateSum.bind(this)
+  }
+
+  calculateSum () {
+
+  }
+
   render () {
     return (
       <div id="list-container">
@@ -24,6 +37,7 @@ class List extends Component {
             <td>n SEK</td>
           </tr>
         </table>
+        <text>{}</text>
       </div>
     )
   }
