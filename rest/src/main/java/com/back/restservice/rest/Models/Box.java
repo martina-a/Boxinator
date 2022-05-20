@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Box {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id = 12;
+    private long id;
 
     @Column
     private String reciever;
