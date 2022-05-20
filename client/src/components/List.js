@@ -4,10 +4,32 @@ class List extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      error: null,
+      isLoaded: false,
       boxes: []
     }
 
     this.calculateSum = this.calculateSum.bind(this)
+  }
+
+  componentDidMount () {
+    fetch('http://localhost:8080/boxes/', {
+      method: 'GET'
+    }).then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            boxes: result
+          })
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          })
+        }
+      )
   }
 
   calculateSum () {
@@ -15,31 +37,38 @@ class List extends Component {
   }
 
   render () {
-    return (
+    const { error, isLoaded, boxes } = this.state
+    if (error) {
+      console.log(boxes)
+      return <div>Error: {error.message}</div>
+    } else if (!isLoaded) {
+      return <div>Loading...</div>
+    } else {
+      return (
       <div id="list-container">
         <table>
-          <tr>
+        <thead>
+        <tr>
             <th>Reciever</th>
             <th>Weight</th>
             <th>Box colour</th>
             <th>Shipping cost</th>
-          </tr>
-          <tr>
-            <td>Example 1</td>
-            <td>22 kg</td>
-            <td></td>
-            <td>n SEK</td>
-          </tr>
-          <tr>
-            <td>Example 2</td>
-            <td>30 kg</td>
-            <td></td>
-            <td>n SEK</td>
-          </tr>
+        </tr>
+        </thead>
+        <tbody>
+        {boxes.map(box => (
+            <tr key={box.id}>
+              <td>{box.reciever}</td>
+              <td>{box.weight}</td>
+              <td>{box.colour}</td>
+              <td>{box.cost}</td>
+            </tr>
+        ))}
+        </tbody>
         </table>
-        <text>{}</text>
       </div>
-    )
+      )
+    }
   }
 }
 
