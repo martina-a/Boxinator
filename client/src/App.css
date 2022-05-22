@@ -1,16 +1,14 @@
 #form-container {
   margin: auto;
   margin-top: 100px;
-  display: flex;
   width: 30%;
   padding: 30px;
   background-color: #dfdfdf;
 }
 
-#list-container {
+#tbl-container {
   margin: auto;
   margin-top: 100px;
-  display: flex;
   width: 30%;
   padding: 30px;
   background-color: #dfdfdf;
@@ -18,15 +16,16 @@
 
 #form {
   margin: auto;
+  width: 60%;
 }
 
 input {
   margin-bottom: 30px;
-  width: 200px;
+  width: 300px;
 }
 
 #country-list {
-  width: 200px;
+  width: 300px;
   margin-bottom: 40px;
   position: relative;
 }
@@ -34,8 +33,9 @@ input {
 #save-btn {
   background-color: #98b986;
   color: white;
-  float: right;
   width: 60px;
+  margin-right: 30px;
+  margin-bottom: 30px;
   padding: 5px;
   border: none;
   border-radius: 5px;
@@ -51,10 +51,16 @@ input {
   box-shadow: 0 0;
 }
 
-table {
+#box-tbl {
   margin: auto;
   border-collapse: collapse;
-  width: 500px;
+  width: 85%;
+}
+
+#sum-tbl {
+  margin: auto;
+  margin-top: 30px;
+  width: 85%;
 }
 
 tr {
@@ -66,4 +72,24 @@ th,
 td {
   padding: 10px;
   text-align: center;
+}
+
+#loading {
+  margin: auto;
+  text-align: center;
+  width: 40%;
+  font-size: 30px;
+}
+
+#error {
+  margin: auto;
+  text-align: center;
+  width: 40%;
+  font-size: 30px;
+}
+
+#event-message {
+  margin: auto;
+  width: 29%;
+  margin-top: -50px;
 }

@@ -9,11 +9,12 @@ class List extends Component {
       boxes: []
     }
 
-    this.calculateSum = this.calculateSum.bind(this)
+    this.calTotalWeight = this.calTotalWeight.bind(this)
+    this.calTotalCost = this.calTotalCost.bind(this)
   }
 
   componentDidMount () {
-    fetch('http://localhost:8080/boxes/', {
+    fetch('http://localhost:8081/boxes/', {
       method: 'GET'
     }).then(res => res.json())
       .then(
@@ -32,21 +33,36 @@ class List extends Component {
       )
   }
 
-  calculateSum () {
+  calTotalWeight () {
+    let totalWeight = 0
 
+    for (let i = 0; i < this.state.boxes.length; i++) {
+      totalWeight += this.state.boxes[i].weight
+    }
+
+    return totalWeight + ' kg'
+  }
+
+  calTotalCost () {
+    let totalCost = 0
+
+    for (let i = 0; i < this.state.boxes.length; i++) {
+      totalCost += this.state.boxes[i].cost
+    }
+
+    return totalCost + ' SEK'
   }
 
   render () {
     const { error, isLoaded, boxes } = this.state
     if (error) {
-      console.log(boxes)
-      return <div>Error: {error.message}</div>
+      return <div id="error"><p>Error: {error.message}</p></div>
     } else if (!isLoaded) {
-      return <div>Loading...</div>
+      return <div id="loading"><p>Loading...</p></div>
     } else {
       return (
-      <div id="list-container">
-        <table>
+      <div id="tbl-container">
+        <table id="box-tbl">
         <thead>
         <tr>
             <th>Reciever</th>
@@ -59,12 +75,26 @@ class List extends Component {
         {boxes.map(box => (
             <tr key={box.id}>
               <td>{box.reciever}</td>
-              <td>{box.weight}</td>
-              <td>{box.colour}</td>
-              <td>{box.cost}</td>
+              <td>{box.weight} kg</td>
+              <td style={{ backgroundColor: box.colour }}></td>
+              <td>{box.cost} SEK</td>
             </tr>
         ))}
         </tbody>
+        </table>
+        <table id="sum-tbl">
+          <thead>
+            <tr>
+              <th>Total weight</th>
+              <th>Total cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{this.calTotalWeight()}</td>
+              <td>{this.calTotalCost()}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       )

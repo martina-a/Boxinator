@@ -7,9 +7,11 @@ class Form extends Component {
       name: '',
       weight: null,
       colour: '#FFFFFF',
-      country: 'Sweden'
+      country: 'Sweden',
+      eventMessage: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.convertToHSL = this.convertToHSL.bind(this)
   }
 
   handleSubmit (e) {
@@ -20,7 +22,7 @@ class Form extends Component {
       }
     }
 
-    fetch('http://localhost:8080/boxes', {
+    fetch('http://localhost:8081/boxes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -33,13 +35,12 @@ class Form extends Component {
       })
     }).then(response => response.text())
       .then(data => {
-        console.log(data)
+        this.setState({
+          eventMessage: data
+        })
       }).catch(err => {
-        // Do something for an error here
         console.log('Error Reading data ' + err)
       })
-
-    console.log(this.state)
 
     e.preventDefault()
   }
@@ -60,6 +61,60 @@ class Form extends Component {
     return cost
   }
 
+  convertToHSL (hex) { // Source: https://www.html-code-generator.com/javascript/color-converter-script
+    hex = hex.replace(/#/g, '')
+    if (hex.length === 3) {
+      hex = hex.split('').map(function (hex) {
+        return hex + hex
+      }).join('')
+    }
+    const result = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})[\da-z]{0,0}$/i.exec(hex)
+    if (!result) {
+      return null
+    }
+    let r = parseInt(result[1], 16)
+    let g = parseInt(result[2], 16)
+    let b = parseInt(result[3], 16)
+    r /= 255
+    g /= 255
+    b /= 255
+    const max = Math.max(r, g, b)
+    const min = Math.min(r, g, b)
+    let h = (max + min) / 2
+    let s = (max + min) / 2
+    let l = (max + min) / 2
+    if (max === min) {
+      h = s = 0
+    } else {
+      const d = max - min
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0)
+          break
+        case g:
+          h = (b - r) / d + 2
+          break
+        case b:
+          h = (r - g) / d + 4
+          break
+      }
+      h /= 6
+    }
+    s = s * 100
+    s = Math.round(s)
+    l = l * 100
+    l = Math.round(l)
+    h = Math.round(360 * h)
+
+    if (h >= 150 && h <= 270) {
+      alert('You are not allowed to choose any shade of blue.')
+      document.getElementById('box-colour').value = '#FFFFFF'
+    } else {
+      this.setState({ colour: `hsl(${h}, ${s}%, ${l}%)` })
+    }
+  }
+
   render () {
     return (
       <div id="form-container">
@@ -67,9 +122,9 @@ class Form extends Component {
           <label htmlFor="box-name">Reciever name:</label><br/>
           <input type="text" id="box-name" name="box-name" onChange={e => this.setState({ name: e.target.value })}/><br/>
           <label htmlFor="box-weight">Weight:</label><br/>
-          <input type="number" id="box-weight" name="box-weight" onChange={e => this.setState({ weight: e.target.value })}/><br/>
+          <input type="number" id="box-weight" name="box-weight" step=".01" onChange={e => this.setState({ weight: e.target.value })}/><br/>
           <label htmlFor="box-colour">Box colour:</label><br/>
-          <input type="color" id="box-colour" name="box-colour" onChange={e => this.setState({ colour: e.target.value })}/><br/>
+          <input type="color" id="box-colour" name="box-colour" onChange={e => this.convertToHSL(e.target.value)}/><br/>
           <label htmlFor="country">Country:</label><br/>
           <select id="country-list" onChange={e => this.setState({ country: e.target.value })}>
             <option label="Sweden">Sweden</option>
@@ -79,6 +134,9 @@ class Form extends Component {
           </select><br/>
           <input type="submit" id="save-btn" placeholder="Save"/>
         </form>
+        <div id="event-message">
+        {this.state.eventMessage}
+        </div>
       </div>
     )
   }
