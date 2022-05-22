@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.*;
 
 public interface BoxRepo extends JpaRepository<Box, Long> {
     public static void main(String[] args) {
-        System.out.println("works");
+        System.out.println("This repo works.");
     }
 }

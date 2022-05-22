@@ -22,7 +22,7 @@ public class Controller {
 
     @GetMapping(value = "/")
     public String hello() {
-        return "Hello World Spring Boot using Platform.sh";
+        return "Hello World Spring Boot";
     }
 
     @GetMapping(value = "boxes")
