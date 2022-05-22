@@ -26,12 +26,12 @@ class Form extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: this.state.name,
+        reciever: this.state.name,
         weight: parseInt(this.state.weight),
         colour: this.state.colour,
         cost: this.calculateCost()
       })
-    }).then(response => response.json())
+    }).then(response => response.text())
       .then(data => {
         console.log(data)
       }).catch(err => {
