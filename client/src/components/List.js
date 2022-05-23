@@ -19,16 +19,17 @@ class List extends Component {
     }).then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            isLoaded: true,
-            boxes: result
-          })
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          })
+          if (result.error) {
+            this.setState({
+              isLoaded: true,
+              error: result.error
+            })
+          } else {
+            this.setState({
+              isLoaded: true,
+              boxes: result
+            })
+          }
         }
       )
   }
@@ -56,7 +57,7 @@ class List extends Component {
   render () {
     const { error, isLoaded, boxes } = this.state
     if (error) {
-      return <div id="error"><p>Error: {error.message}</p></div>
+      return <div id="error"><p>Error: {error}</p></div>
     } else if (!isLoaded) {
       return <div id="loading"><p>Loading...</p></div>
     } else {

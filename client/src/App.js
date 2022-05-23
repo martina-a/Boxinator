@@ -13,8 +13,6 @@ function App () {
         <Route exact path='/listboxes' element={<List/>} />
       </Routes>
     </HashRouter>
-  // <Form></Form>
-  // <List></List></>
   )
 }
 

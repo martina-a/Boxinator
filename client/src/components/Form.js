@@ -29,7 +29,7 @@ class Form extends Component {
       },
       body: JSON.stringify({
         reciever: this.state.name,
-        weight: parseInt(this.state.weight),
+        weight: parseFloat(this.state.weight.replace(/,/g, '.')).toFixed(2),
         colour: this.state.colour,
         cost: this.calculateCost()
       })
@@ -57,7 +57,7 @@ class Form extends Component {
       multiplier = 7.2
     }
 
-    const cost = parseInt(this.state.weight) * multiplier
+    const cost = parseFloat(this.state.weight.replace(/,/g, '.')).toFixed(2) * multiplier
     return cost
   }
 
@@ -120,7 +120,10 @@ class Form extends Component {
       <div id="form-container">
         <form id="form" onSubmit={this.handleSubmit}>
           <label htmlFor="box-name">Reciever name:</label><br/>
-          <input type="text" id="box-name" name="box-name" onChange={e => this.setState({ name: e.target.value })}/><br/>
+          <input type="text" id="box-name" name="box-name" onChange={e => {
+            this.setState({ eventMessage: '' })
+            this.setState({ name: e.target.value })
+          }}/><br/>
           <label htmlFor="box-weight">Weight:</label><br/>
           <input type="number" id="box-weight" name="box-weight" step=".01" onChange={e => this.setState({ weight: e.target.value })}/><br/>
           <label htmlFor="box-colour">Box colour:</label><br/>
@@ -132,9 +135,9 @@ class Form extends Component {
             <option label="Brazil">Brazil</option>
             <option label="Australia">Australia</option>
           </select><br/>
-          <input type="submit" id="save-btn" placeholder="Save"/>
+          <input type="submit" id="save-btn" data-testid="save-btn" placeholder="Save"/>
         </form>
-        <div id="event-message">
+        <div id="event-message" data-testid="event-message">
         {this.state.eventMessage}
         </div>
       </div>
