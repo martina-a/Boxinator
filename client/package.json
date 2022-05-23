@@ -16,6 +16,7 @@
     "start": "PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
+    "test": "react-scripts test",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix"
   },
@@ -38,6 +39,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/preset-env": "^7.18.0",
+    "babel-jest": "^28.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^8.15.0",

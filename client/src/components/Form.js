@@ -151,13 +151,13 @@ class Form extends Component {
           <label htmlFor="box-colour">Box colour:</label><br/>
           <input type="color" id="box-colour" name="box-colour" onChange={e => this.convertToHSL(e.target.value)}/><br/>
           <label htmlFor="country">Country:</label><br/>
-          <select id="country-list" onChange={e => this.setState({ country: e.target.value })}>
-            <option label="Sweden">Sweden</option>
-            <option label="China">China</option>
-            <option label="Brazil">Brazil</option>
-            <option label="Australia">Australia</option>
+          <select id="country-list" data-testid="country-list" onChange={e => this.setState({ country: e.target.value })}>
+            <option value="Sweden">Sweden</option>
+            <option value="China">China</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Australia">Australia</option>
           </select><br/>
-          <input type="submit" id="save-btn" data-testid="save-btn" placeholder="Save"/>
+          <input type="submit" id="save-btn" name="save-btn" placeholder="Save"/>
         </form>
         <div id="event-message" data-testid="event-message">
         {this.state.eventMessage}
