@@ -13,6 +13,10 @@ class List extends Component {
     this.calTotalCost = this.calTotalCost.bind(this)
   }
 
+  /**
+   * Is called immediately.
+   * Asks the server for all saved boxes.
+   */
   componentDidMount () {
     fetch('http://localhost:8081/boxes/', {
       method: 'GET'
@@ -34,6 +38,9 @@ class List extends Component {
       )
   }
 
+  /**
+   * Calculates the weight sum of all the boxes.
+   */
   calTotalWeight () {
     let totalWeight = 0
 
@@ -44,6 +51,9 @@ class List extends Component {
     return totalWeight + ' kg'
   }
 
+  /**
+   * Calculates the cost sum of all the boxes.
+   */
   calTotalCost () {
     let totalCost = 0
 

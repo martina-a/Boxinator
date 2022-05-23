@@ -12,10 +12,14 @@ class Form extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.convertToHSL = this.convertToHSL.bind(this)
+    this.setColourAvoidBlue = this.setColourAvoidBlue.bind(this)
   }
 
+  /**
+   * Sends a POST request to the server to save the box.
+   */
   handleSubmit (e) {
-    for (const value in this.state) {
+    for (const value in this.state) { // Alerts the user if any of the values are invalid.
       if (this.state[value] === 'undefined' || this.state[value] === null) {
         alert('You must enter a valid value for ' + value)
         return
@@ -29,14 +33,14 @@ class Form extends Component {
       },
       body: JSON.stringify({
         reciever: this.state.name,
-        weight: parseFloat(this.state.weight.replace(/,/g, '.')).toFixed(2),
+        weight: parseFloat(this.state.weight.replace(/,/g, '.')).toFixed(2), // Converts the weight string to a two-decimal float.
         colour: this.state.colour,
         cost: this.calculateCost()
       })
     }).then(response => response.text())
       .then(data => {
         this.setState({
-          eventMessage: data
+          eventMessage: data // Set message to the server's response.
         })
       }).catch(err => {
         console.log('Error Reading data ' + err)
@@ -45,6 +49,9 @@ class Form extends Component {
     e.preventDefault()
   }
 
+  /**
+   * Calculates the cost of the box depending on the destination.
+   */
   calculateCost () {
     let multiplier
     if (this.state.country === 'Sweden') {
@@ -61,6 +68,9 @@ class Form extends Component {
     return cost
   }
 
+  /**
+   * Converts the hex value of a colour to hsl.
+   */
   convertToHSL (hex) { // Source: https://www.html-code-generator.com/javascript/color-converter-script
     hex = hex.replace(/#/g, '')
     if (hex.length === 3) {
@@ -107,7 +117,14 @@ class Form extends Component {
     l = Math.round(l)
     h = Math.round(360 * h)
 
-    if (h >= 150 && h <= 270) {
+    this.setColourAvoidBlue(h, s, l)
+  }
+
+  /**
+   * Sets the colour.
+   */
+  setColourAvoidBlue (h, s, l) {
+    if (h >= 150 && h <= 270) { // Alerts the user that blue colours are forbidden.
       alert('You are not allowed to choose any shade of blue.')
       document.getElementById('box-colour').value = '#FFFFFF'
     } else {

@@ -1,5 +1,7 @@
 package com.back.restservice.rest.Models;
 
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,13 +14,13 @@ public class Box {
     private String reciever;
 
     @Column
-    private Integer weight;
+    private BigDecimal weight;
 
     @Column
     private String colour;
 
     @Column
-    private Integer cost;
+    private float cost;
 
     public long getId() {
         return id;
@@ -36,11 +38,11 @@ public class Box {
         this.reciever = reciever;
     }
 
-    public Integer getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(BigDecimal weight) {
         this.weight = weight;
     }
 
@@ -52,11 +54,11 @@ public class Box {
         this.colour = colour;
     }
 
-    public Integer getCost() {
+    public float getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(float cost) {
         this.cost = cost;
     }
 }

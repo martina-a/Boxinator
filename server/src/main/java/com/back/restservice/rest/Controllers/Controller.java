@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:8080/")
 @RequestMapping("/")
 public class Controller {
     @Autowired
@@ -33,6 +33,6 @@ public class Controller {
     @PostMapping(value = "boxes")
     public String saveBox(@RequestBody Box box) {
         boxrepo.save(box);
-        return "Successful";
+        return "The box is now saved!";
     }
 }
