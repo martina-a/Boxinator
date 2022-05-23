@@ -19,6 +19,11 @@ class Form extends Component {
    * Sends a POST request to the server to save the box.
    */
   handleSubmit (e) {
+    if (this.state.weight < 0) {
+      alert('Negative values are not permitted.')
+      this.setState({ weight: null })
+      return
+    }
     for (const value in this.state) { // Alerts the user if any of the values are invalid.
       if (this.state[value] === 'undefined' || this.state[value] === null) {
         alert('You must enter a valid value for ' + value)
