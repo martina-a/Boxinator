@@ -69,7 +69,7 @@ class List extends Component {
     if (error) {
       return <div id="error"><p>Error: {error}</p></div>
     } else if (!isLoaded) {
-      return <div id="loading"><p>Loading...</p></div>
+      return <div id="loading" data-testid="loading"><p>Loading...</p></div>
     } else {
       return (
       <div id="tbl-container">

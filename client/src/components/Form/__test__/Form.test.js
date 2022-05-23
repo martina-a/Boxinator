@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, getByTestId } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Form from '../../Form'
+import Form from '../Form.js'
 
 test('Initial state should be empty in text fields and default in others', () => {
   const { container } = render(<Form />)

@@ -2,8 +2,8 @@ import './App.css'
 import React from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 
-import Form from './components/Form.js'
-import List from './components/List.js'
+import Form from './components/Form/Form.js'
+import List from './components/List/List.js'
 
 function App () {
   return (
