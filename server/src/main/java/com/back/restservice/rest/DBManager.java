@@ -8,7 +8,14 @@ public class DBManager {
     public void connectDB() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306?useSSL=false", "root", "root");
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306?useSSL=false", "root", "root"); // CHANGE
+                                                                                                                       // PORT,
+                                                                                                                       // USERNAME
+                                                                                                                       // AND
+                                                                                                                       // PASSWORD
+                                                                                                                       // TO
+                                                                                                                       // YOUR
+                                                                                                                       // OWN!!!
             System.out.println("Connection created");
             this.createDB();
         } catch (Exception e) {
